@@ -7,7 +7,7 @@ from collections import defaultdict
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 ALLOWED_USER_ID = 6310451989
 WORK_DIR = os.path.expanduser("~")
-CLAUDE_CMD = "claude"
+CLAUDE_CMD = "/home/jmax/.local/bin/claude"
 MAX_HISTORY = 20
 TELEGRAM_MSG_LIMIT = 4096
 
