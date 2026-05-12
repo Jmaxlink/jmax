@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
+echo "==> Creating virtual environment..."
+python3 -m venv venv
 echo "==> Installing dependencies..."
-pip3 install -r requirements.txt
+venv/bin/pip install -r requirements.txt
 
 echo "==> Creating .env file..."
 if [ ! -f .env ]; then

@@ -5,9 +5,9 @@ After=network.target
 [Service]
 Type=simple
 User=jmax
-WorkingDirectory=/home/jmax
-EnvironmentFile=/home/jmax/telegram-bot/.env
-ExecStart=/usr/bin/python3 /home/jmax/telegram-bot/bot.py
+WorkingDirectory=/home/jmax/jmax/telegram-bot
+EnvironmentFile=/home/jmax/jmax/telegram-bot/.env
+ExecStart=/home/jmax/jmax/telegram-bot/venv/bin/python3 /home/jmax/jmax/telegram-bot/bot.py
 Restart=always
 RestartSec=5
 
