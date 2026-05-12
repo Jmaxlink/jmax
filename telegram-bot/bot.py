@@ -32,25 +32,66 @@ last_request_mtime = 0
 session_allowed_tools = set()
 
 
-def run_claude(user_text, history):
+def build_prompt(user_text, history):
     if len(history) > 1:
         context_lines = []
         for m in history[:-1]:
             role = "User" if m["role"] == "user" else "Assistant"
             context_lines.append(f"{role}: {m['content']}")
         context = "\n\n".join(context_lines)
-        full_prompt = f"Previous conversation:\n{context}\n\nUser: {user_text}"
-    else:
-        full_prompt = user_text
+        return f"Previous conversation:\n{context}\n\nUser: {user_text}"
+    return user_text
 
-    result = subprocess.run(
-        [CLAUDE_CMD, "-p", full_prompt],
-        capture_output=True,
+
+def run_claude_streaming(full_prompt, status_lines):
+    process = subprocess.Popen(
+        [CLAUDE_CMD, "-p", full_prompt, "--output-format", "stream-json", "--verbose"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         text=True,
         cwd=WORK_DIR,
-        timeout=300,
     )
-    return (result.stdout or result.stderr or "").strip()
+
+    final_result = []
+
+    for raw_line in iter(process.stdout.readline, ""):
+        raw_line = raw_line.strip()
+        if not raw_line:
+            continue
+        try:
+            event = json.loads(raw_line)
+            etype = event.get("type", "")
+
+            if etype == "assistant":
+                for block in event.get("message", {}).get("content", []):
+                    btype = block.get("type", "")
+                    if btype == "text":
+                        text = block["text"].strip()
+                        if text:
+                            final_result.append(text)
+                            status_lines.append(f"💬 {text[:120]}")
+                    elif btype == "tool_use":
+                        tool = block.get("name", "")
+                        inp = block.get("input", {})
+                        if tool == "Bash":
+                            status_lines.append(f"🔧 `{inp.get('command', '')[:100]}`")
+                        elif tool in ("Write", "Edit"):
+                            status_lines.append(f"📝 {tool}: {inp.get('file_path', '')}")
+                        elif tool == "Read":
+                            status_lines.append(f"📖 {inp.get('file_path', '')}")
+                        else:
+                            status_lines.append(f"🔧 {tool}")
+
+            elif etype == "result":
+                r = event.get("result", "")
+                if r:
+                    final_result = [r]
+
+        except (json.JSONDecodeError, KeyError):
+            pass
+
+    process.wait(timeout=300)
+    return "\n".join(final_result).strip()
 
 
 def send_long_message(chat_id, text):
@@ -68,17 +109,16 @@ def is_allowed(message):
 SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
 
-def processing_indicator(chat_id, message_id, stop_event):
+def processing_indicator(chat_id, message_id, stop_event, status_lines):
     start = time.time()
     i = 0
     while not stop_event.is_set():
         elapsed = int(time.time() - start)
+        header = f"{SPINNER[i % len(SPINNER)]} Processing... ({elapsed}s)"
+        recent = list(status_lines[-5:])
+        text = header + ("\n\n" + "\n".join(recent) if recent else "")
         try:
-            bot.edit_message_text(
-                f"{SPINNER[i % len(SPINNER)]} Processing... ({elapsed}s)",
-                chat_id,
-                message_id,
-            )
+            bot.edit_message_text(text[:4096], chat_id, message_id)
         except Exception:
             pass
         i += 1
@@ -215,24 +255,25 @@ def handle_message(message):
     user_text = message.text
     active_chat_id = message.chat.id
 
-    proc_msg = bot.send_message(message.chat.id, "⏳ Starting...")
-    stop_event = threading.Event()
-    threading.Thread(
-        target=processing_indicator,
-        args=(message.chat.id, proc_msg.message_id, stop_event),
-        daemon=True,
-    ).start()
-
     history = conversations[user_id]
     history.append({"role": "user", "content": user_text})
-
     if len(history) > MAX_HISTORY:
         conversations[user_id] = history[-MAX_HISTORY:]
         history = conversations[user_id]
 
+    full_prompt = build_prompt(user_text, history)
+    status_lines = []
+    proc_msg = bot.send_message(message.chat.id, "⏳ Starting...")
+    stop_event = threading.Event()
+    threading.Thread(
+        target=processing_indicator,
+        args=(message.chat.id, proc_msg.message_id, stop_event, status_lines),
+        daemon=True,
+    ).start()
+
     start_time = time.time()
     try:
-        response = run_claude(user_text, history)
+        response = run_claude_streaming(full_prompt, status_lines)
         elapsed = int(time.time() - start_time)
         stop_event.set()
         history.append({"role": "assistant", "content": response})
