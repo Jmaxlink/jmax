@@ -43,12 +43,13 @@ def build_prompt(user_text, history):
     return user_text
 
 
-def run_claude_streaming(full_prompt, status_lines):
+def run_claude_streaming(full_prompt, status_lines, new_line_event):
     process = subprocess.Popen(
         [CLAUDE_CMD, "-p", full_prompt, "--output-format", "stream-json", "--verbose"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
+        bufsize=1,
         cwd=WORK_DIR,
     )
 
@@ -70,6 +71,7 @@ def run_claude_streaming(full_prompt, status_lines):
                         if text:
                             final_result.append(text)
                             status_lines.append(f"💬 {text[:120]}")
+                            new_line_event.set()
                     elif btype == "tool_use":
                         tool = block.get("name", "")
                         inp = block.get("input", {})
@@ -81,6 +83,7 @@ def run_claude_streaming(full_prompt, status_lines):
                             status_lines.append(f"📖 {inp.get('file_path', '')}")
                         else:
                             status_lines.append(f"🔧 {tool}")
+                        new_line_event.set()
 
             elif etype == "result":
                 r = event.get("result", "")
@@ -109,7 +112,7 @@ def is_allowed(message):
 SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
 
-def processing_indicator(chat_id, message_id, stop_event, status_lines):
+def processing_indicator(chat_id, message_id, stop_event, status_lines, new_line_event):
     start = time.time()
     i = 0
     while not stop_event.is_set():
@@ -122,7 +125,9 @@ def processing_indicator(chat_id, message_id, stop_event, status_lines):
         except Exception:
             pass
         i += 1
-        stop_event.wait(timeout=2)
+        # Wake up immediately on new activity, otherwise tick every 2s
+        new_line_event.wait(timeout=2)
+        new_line_event.clear()
 
 
 def permission_watcher():
@@ -263,17 +268,18 @@ def handle_message(message):
 
     full_prompt = build_prompt(user_text, history)
     status_lines = []
-    proc_msg = bot.send_message(message.chat.id, "⏳ Starting...")
     stop_event = threading.Event()
+    new_line_event = threading.Event()
+    proc_msg = bot.send_message(message.chat.id, "⏳ Starting...")
     threading.Thread(
         target=processing_indicator,
-        args=(message.chat.id, proc_msg.message_id, stop_event, status_lines),
+        args=(message.chat.id, proc_msg.message_id, stop_event, status_lines, new_line_event),
         daemon=True,
     ).start()
 
     start_time = time.time()
     try:
-        response = run_claude_streaming(full_prompt, status_lines)
+        response = run_claude_streaming(full_prompt, status_lines, new_line_event)
         elapsed = int(time.time() - start_time)
         stop_event.set()
         history.append({"role": "assistant", "content": response})
