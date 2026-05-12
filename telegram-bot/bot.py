@@ -260,6 +260,11 @@ def handle_message(message):
     user_text = message.text
     active_chat_id = message.chat.id
 
+    # If user replied to a previous message, include that as context
+    if message.reply_to_message and message.reply_to_message.text:
+        replied = message.reply_to_message.text[:500]
+        user_text = f"[Replying to: \"{replied}\"]\n\n{user_text}"
+
     history = conversations[user_id]
     history.append({"role": "user", "content": user_text})
     if len(history) > MAX_HISTORY:
