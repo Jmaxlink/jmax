@@ -28,6 +28,9 @@ conversations = defaultdict(list)
 active_chat_id = ALLOWED_USER_ID
 last_request_mtime = 0
 
+# Tools approved for the entire session (don't ask again)
+session_allowed_tools = set()
+
 
 def run_claude(user_text, history):
     if len(history) > 1:
@@ -85,12 +88,21 @@ def permission_watcher():
                         snippet = json.dumps(tool_input)[:300]
                         detail = f"`{snippet}`"
 
+                    # Auto-allow if user approved this tool for the session
+                    if tool_name in session_allowed_tools:
+                        with open(PERM_RESPONSE_FILE, "w") as f:
+                            f.write("allow")
+                        continue
+
                     msg = f"🔐 *Permission Request*\n\nTool: `{tool_name}`\n{detail}"
 
                     markup = types.InlineKeyboardMarkup()
                     markup.row(
-                        types.InlineKeyboardButton("✅ Allow", callback_data="perm_allow"),
-                        types.InlineKeyboardButton("❌ Deny", callback_data="perm_deny"),
+                        types.InlineKeyboardButton("✅ Yes (once)", callback_data="perm_once"),
+                        types.InlineKeyboardButton("🔓 Yes (session)", callback_data="perm_session"),
+                    )
+                    markup.row(
+                        types.InlineKeyboardButton("❌ No", callback_data="perm_deny"),
                     )
                     bot.send_message(active_chat_id, msg, reply_markup=markup, parse_mode="Markdown")
         except Exception:
@@ -98,17 +110,32 @@ def permission_watcher():
         time.sleep(0.5)
 
 
-@bot.callback_query_handler(func=lambda call: call.data in ("perm_allow", "perm_deny"))
+@bot.callback_query_handler(func=lambda call: call.data in ("perm_once", "perm_session", "perm_deny"))
 def handle_permission(call):
     if call.from_user.id != ALLOWED_USER_ID:
         return
 
-    response = "allow" if call.data == "perm_allow" else "deny"
+    if call.data == "perm_deny":
+        with open(PERM_RESPONSE_FILE, "w") as f:
+            f.write("deny")
+        label = "❌ Denied"
+    else:
+        with open(PERM_RESPONSE_FILE, "w") as f:
+            f.write("allow")
+        if call.data == "perm_session":
+            # Extract tool name from the message and add to session allowlist
+            try:
+                for line in call.message.text.splitlines():
+                    if line.startswith("Tool:"):
+                        tool_name = line.split("`")[1]
+                        session_allowed_tools.add(tool_name)
+                        break
+            except (IndexError, AttributeError):
+                pass
+            label = "🔓 Allowed for session"
+        else:
+            label = "✅ Allowed (once)"
 
-    with open(PERM_RESPONSE_FILE, "w") as f:
-        f.write(response)
-
-    label = "✅ Allowed" if response == "allow" else "❌ Denied"
     bot.edit_message_text(label, call.message.chat.id, call.message.message_id)
     bot.answer_callback_query(call.id)
 
@@ -133,7 +160,8 @@ def cmd_clear(message):
     if not is_allowed(message):
         return
     conversations[message.from_user.id].clear()
-    bot.reply_to(message, "Conversation cleared.")
+    session_allowed_tools.clear()
+    bot.reply_to(message, "Conversation and session permissions cleared.")
 
 
 @bot.message_handler(commands=["status"])
