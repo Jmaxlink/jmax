@@ -65,6 +65,26 @@ def is_allowed(message):
     return message.from_user.id == ALLOWED_USER_ID
 
 
+SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+
+
+def processing_indicator(chat_id, message_id, stop_event):
+    start = time.time()
+    i = 0
+    while not stop_event.is_set():
+        elapsed = int(time.time() - start)
+        try:
+            bot.edit_message_text(
+                f"{SPINNER[i % len(SPINNER)]} Processing... ({elapsed}s)",
+                chat_id,
+                message_id,
+            )
+        except Exception:
+            pass
+        i += 1
+        stop_event.wait(timeout=2)
+
+
 def permission_watcher():
     global last_request_mtime
     while True:
@@ -195,7 +215,13 @@ def handle_message(message):
     user_text = message.text
     active_chat_id = message.chat.id
 
-    bot.send_chat_action(message.chat.id, "typing")
+    proc_msg = bot.send_message(message.chat.id, "⏳ Starting...")
+    stop_event = threading.Event()
+    threading.Thread(
+        target=processing_indicator,
+        args=(message.chat.id, proc_msg.message_id, stop_event),
+        daemon=True,
+    ).start()
 
     history = conversations[user_id]
     history.append({"role": "user", "content": user_text})
@@ -204,15 +230,23 @@ def handle_message(message):
         conversations[user_id] = history[-MAX_HISTORY:]
         history = conversations[user_id]
 
+    start_time = time.time()
     try:
         response = run_claude(user_text, history)
+        elapsed = int(time.time() - start_time)
+        stop_event.set()
         history.append({"role": "assistant", "content": response})
+        bot.edit_message_text(f"✅ Done in {elapsed}s", message.chat.id, proc_msg.message_id)
         send_long_message(message.chat.id, response)
     except subprocess.TimeoutExpired:
-        bot.reply_to(message, "Claude took too long (>300s). Try a simpler request.")
+        stop_event.set()
+        bot.edit_message_text("⏱ Timed out", message.chat.id, proc_msg.message_id)
+        bot.send_message(message.chat.id, "Claude took too long (>300s). Try a simpler request.")
         history.pop()
     except Exception as e:
-        bot.reply_to(message, f"Error: {e}")
+        stop_event.set()
+        bot.edit_message_text("❌ Error", message.chat.id, proc_msg.message_id)
+        bot.send_message(message.chat.id, f"Error: {e}")
         history.pop()
 
 
