@@ -1,0 +1,79 @@
+.class public Lio/netty/handler/codec/http2/Http2ConnectionAdapter;
+.super Ljava/lang/Object;
+.source "Http2ConnectionAdapter.java"
+
+# interfaces
+.implements Lio/netty/handler/codec/http2/Http2Connection$Listener;
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 0
+
+    .line 24
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public onGoAwayReceived(IJLio/netty/buffer/ByteBuf;)V
+    .locals 0
+    .param p1, "lastStreamId"    # I
+    .param p2, "errorCode"    # J
+    .param p4, "debugData"    # Lio/netty/buffer/ByteBuf;
+
+    .line 51
+    return-void
+.end method
+
+.method public onGoAwaySent(IJLio/netty/buffer/ByteBuf;)V
+    .locals 0
+    .param p1, "lastStreamId"    # I
+    .param p2, "errorCode"    # J
+    .param p4, "debugData"    # Lio/netty/buffer/ByteBuf;
+
+    .line 47
+    return-void
+.end method
+
+.method public onStreamActive(Lio/netty/handler/codec/http2/Http2Stream;)V
+    .locals 0
+    .param p1, "stream"    # Lio/netty/handler/codec/http2/Http2Stream;
+
+    .line 31
+    return-void
+.end method
+
+.method public onStreamAdded(Lio/netty/handler/codec/http2/Http2Stream;)V
+    .locals 0
+    .param p1, "stream"    # Lio/netty/handler/codec/http2/Http2Stream;
+
+    .line 27
+    return-void
+.end method
+
+.method public onStreamClosed(Lio/netty/handler/codec/http2/Http2Stream;)V
+    .locals 0
+    .param p1, "stream"    # Lio/netty/handler/codec/http2/Http2Stream;
+
+    .line 39
+    return-void
+.end method
+
+.method public onStreamHalfClosed(Lio/netty/handler/codec/http2/Http2Stream;)V
+    .locals 0
+    .param p1, "stream"    # Lio/netty/handler/codec/http2/Http2Stream;
+
+    .line 35
+    return-void
+.end method
+
+.method public onStreamRemoved(Lio/netty/handler/codec/http2/Http2Stream;)V
+    .locals 0
+    .param p1, "stream"    # Lio/netty/handler/codec/http2/Http2Stream;
+
+    .line 43
+    return-void
+.end method

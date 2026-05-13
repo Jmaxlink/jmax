@@ -1,0 +1,39 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: 00068908-HermesBridge.apk
+compressionType: false
+doNotCompress:
+- resources.arsc
+- META-INF/kotlinx_coroutines_android.version
+- META-INF/kotlinx_coroutines_core.version
+- META-INF/kotlinx_coroutines_jdk8.version
+- png
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '26'
+  targetSdkVersion: '34'
+sharedLibrary: false
+sparseResources: false
+unknownFiles:
+  DebugProbesKt.bin: '8'
+  custom.config.conf: '8'
+  custom.config.yaml: '8'
+  okhttp3/internal/publicsuffix/NOTICE: '8'
+  okhttp3/internal/publicsuffix/publicsuffixes.gz: '0'
+  org/fusesource/jansi/jansi.properties: '0'
+  org/fusesource/jansi/jansi.txt: '8'
+  org/fusesource/jansi/internal/native/Mac/arm64/libjansi.jnilib: '8'
+  org/fusesource/jansi/internal/native/Mac/x86/libjansi.jnilib: '8'
+  org/fusesource/jansi/internal/native/Mac/x86_64/libjansi.jnilib: '8'
+  org/fusesource/jansi/internal/native/Windows/x86/jansi.dll: '8'
+  org/fusesource/jansi/internal/native/Windows/x86_64/jansi.dll: '8'
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.7.0-dirty
+versionInfo:
+  versionCode: '1'
+  versionName: 0.2.0

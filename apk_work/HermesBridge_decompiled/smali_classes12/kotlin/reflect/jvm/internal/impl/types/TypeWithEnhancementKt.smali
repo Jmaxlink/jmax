@@ -1,0 +1,225 @@
+.class public final Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancementKt;
+.super Ljava/lang/Object;
+.source "TypeWithEnhancement.kt"
+
+
+# annotations
+.annotation system Ldalvik/annotation/SourceDebugExtension;
+    value = "SMAP\nTypeWithEnhancement.kt\nKotlin\n*S Kotlin\n*F\n+ 1 TypeWithEnhancement.kt\norg/jetbrains/kotlin/types/TypeWithEnhancementKt\n+ 2 _Collections.kt\nkotlin/collections/CollectionsKt___CollectionsKt\n*L\n1#1,169:1\n1549#2:170\n1620#2,3:171\n1726#2,3:174\n*S KotlinDebug\n*F\n+ 1 TypeWithEnhancement.kt\norg/jetbrains/kotlin/types/TypeWithEnhancementKt\n*L\n97#1:170\n97#1:171,3\n112#1:174,3\n*E\n"
+.end annotation
+
+
+# direct methods
+.method public static final getEnhancement(Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+    .locals 1
+    .param p0, "$this$getEnhancement"    # Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+
+    const-string v0, "<this>"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 91
+    nop
+
+    .line 92
+    instance-of v0, p0, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancement;
+
+    if-eqz v0, :cond_0
+
+    move-object v0, p0
+
+    check-cast v0, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancement;
+
+    invoke-interface {v0}, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancement;->getEnhancement()Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+
+    move-result-object v0
+
+    goto :goto_0
+
+    .line 93
+    :cond_0
+    const/4 v0, 0x0
+
+    .line 94
+    :goto_0
+    return-object v0
+.end method
+
+.method public static final inheritEnhancement(Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+    .locals 1
+    .param p0, "$this$inheritEnhancement"    # Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+    .param p1, "origin"    # Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+
+    const-string v0, "<this>"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v0, "origin"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 155
+    invoke-static {p1}, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancementKt;->getEnhancement(Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancementKt;->wrapEnhancement(Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final inheritEnhancement(Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;Lkotlin/jvm/functions/Function1;)Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+    .locals 1
+    .param p0, "$this$inheritEnhancement"    # Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+    .param p1, "origin"    # Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+    .param p2, "transform"    # Lkotlin/jvm/functions/Function1;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;",
+            "Lkotlin/reflect/jvm/internal/impl/types/KotlinType;",
+            "Lkotlin/jvm/functions/Function1<",
+            "-",
+            "Lkotlin/reflect/jvm/internal/impl/types/KotlinType;",
+            "+",
+            "Lkotlin/reflect/jvm/internal/impl/types/KotlinType;",
+            ">;)",
+            "Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;"
+        }
+    .end annotation
+
+    const-string v0, "<this>"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v0, "origin"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v0, "transform"
+
+    invoke-static {p2, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 153
+    invoke-static {p1}, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancementKt;->getEnhancement(Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_0
+
+    invoke-interface {p2, v0}, Lkotlin/jvm/functions/Function1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+
+    goto :goto_0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    :goto_0
+    invoke-static {p0, v0}, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancementKt;->wrapEnhancement(Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final wrapEnhancement(Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+    .locals 2
+    .param p0, "$this$wrapEnhancement"    # Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+    .param p1, "enhancement"    # Lkotlin/reflect/jvm/internal/impl/types/KotlinType;
+
+    const-string v0, "<this>"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 158
+    instance-of v0, p0, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancement;
+
+    if-eqz v0, :cond_0
+
+    .line 159
+    move-object v0, p0
+
+    check-cast v0, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancement;
+
+    invoke-interface {v0}, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancement;->getOrigin()Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+
+    move-result-object v0
+
+    invoke-static {v0, p1}, Lkotlin/reflect/jvm/internal/impl/types/TypeWithEnhancementKt;->wrapEnhancement(Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+
+    move-result-object v0
+
+    return-object v0
+
+    .line 161
+    :cond_0
+    if-eqz p1, :cond_4
+
+    invoke-static {p1, p0}, Lkotlin/jvm/internal/Intrinsics;->areEqual(Ljava/lang/Object;Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    goto :goto_1
+
+    .line 164
+    :cond_1
+    nop
+
+    .line 165
+    instance-of v0, p0, Lkotlin/reflect/jvm/internal/impl/types/SimpleType;
+
+    if-eqz v0, :cond_2
+
+    new-instance v0, Lkotlin/reflect/jvm/internal/impl/types/SimpleTypeWithEnhancement;
+
+    move-object v1, p0
+
+    check-cast v1, Lkotlin/reflect/jvm/internal/impl/types/SimpleType;
+
+    invoke-direct {v0, v1, p1}, Lkotlin/reflect/jvm/internal/impl/types/SimpleTypeWithEnhancement;-><init>(Lkotlin/reflect/jvm/internal/impl/types/SimpleType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)V
+
+    check-cast v0, Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+
+    goto :goto_0
+
+    .line 166
+    :cond_2
+    instance-of v0, p0, Lkotlin/reflect/jvm/internal/impl/types/FlexibleType;
+
+    if-eqz v0, :cond_3
+
+    new-instance v0, Lkotlin/reflect/jvm/internal/impl/types/FlexibleTypeWithEnhancement;
+
+    move-object v1, p0
+
+    check-cast v1, Lkotlin/reflect/jvm/internal/impl/types/FlexibleType;
+
+    invoke-direct {v0, v1, p1}, Lkotlin/reflect/jvm/internal/impl/types/FlexibleTypeWithEnhancement;-><init>(Lkotlin/reflect/jvm/internal/impl/types/FlexibleType;Lkotlin/reflect/jvm/internal/impl/types/KotlinType;)V
+
+    check-cast v0, Lkotlin/reflect/jvm/internal/impl/types/UnwrappedType;
+
+    .line 164
+    :goto_0
+    return-object v0
+
+    .line 166
+    :cond_3
+    new-instance v0, Lkotlin/NoWhenBranchMatchedException;
+
+    invoke-direct {v0}, Lkotlin/NoWhenBranchMatchedException;-><init>()V
+
+    throw v0
+
+    .line 162
+    :cond_4
+    :goto_1
+    return-object p0
+.end method

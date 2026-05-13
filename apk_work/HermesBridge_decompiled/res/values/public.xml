@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public type="drawable" name="bg_button_disconnect" id="0x7f010000" />
+    <public type="drawable" name="bg_button_orange" id="0x7f010001" />
+    <public type="drawable" name="bg_card_rounded" id="0x7f010002" />
+    <public type="drawable" name="bg_circuit_pattern" id="0x7f010003" />
+    <public type="drawable" name="bg_input_dark" id="0x7f010004" />
+    <public type="drawable" name="bg_status_dot_green" id="0x7f010005" />
+    <public type="drawable" name="bg_status_dot_grey" id="0x7f010006" />
+    <public type="drawable" name="bg_status_dot_red" id="0x7f010007" />
+    <public type="drawable" name="bg_switch_thumb" id="0x7f010008" />
+    <public type="drawable" name="bg_switch_track" id="0x7f010009" />
+    <public type="drawable" name="bg_switch_track_off" id="0x7f01000a" />
+    <public type="drawable" name="bg_switch_track_on" id="0x7f01000b" />
+    <public type="id" name="btnAccessibility" id="0x7f020000" />
+    <public type="id" name="btnConnect" id="0x7f020001" />
+    <public type="id" name="btnDisconnect" id="0x7f020002" />
+    <public type="id" name="btnOverlay" id="0x7f020003" />
+    <public type="id" name="btnRegenerate" id="0x7f020004" />
+    <public type="id" name="btnScreenRecord" id="0x7f020005" />
+    <public type="id" name="etServerUrl" id="0x7f020006" />
+    <public type="id" name="indicatorA11y" id="0x7f020007" />
+    <public type="id" name="indicatorAuth" id="0x7f020008" />
+    <public type="id" name="indicatorRelay" id="0x7f020009" />
+    <public type="id" name="indicatorServer" id="0x7f02000a" />
+    <public type="id" name="switchAccessibility" id="0x7f02000b" />
+    <public type="id" name="switchOverlay" id="0x7f02000c" />
+    <public type="id" name="switchScreenRecord" id="0x7f02000d" />
+    <public type="id" name="tvA11yStatus" id="0x7f02000e" />
+    <public type="id" name="tvAddress" id="0x7f02000f" />
+    <public type="id" name="tvAuthCode" id="0x7f020010" />
+    <public type="id" name="tvPairingCode" id="0x7f020011" />
+    <public type="id" name="tvRelayAddr" id="0x7f020012" />
+    <public type="id" name="tvRelayStatus" id="0x7f020013" />
+    <public type="id" name="tvScreenRecordStatus" id="0x7f020014" />
+    <public type="id" name="tvServerStatus" id="0x7f020015" />
+    <public type="id" name="tvSetupCommand" id="0x7f020016" />
+    <public type="id" name="tvStatus" id="0x7f020017" />
+    <public type="layout" name="activity_main" id="0x7f030000" />
+    <public type="mipmap" name="ic_launcher" id="0x7f040000" />
+    <public type="mipmap" name="ic_launcher_round" id="0x7f040001" />
+    <public type="string" name="accessibility_description" id="0x7f050000" />
+    <public type="string" name="app_name" id="0x7f050001" />
+    <public type="style" name="Theme.HermesBridge" id="0x7f060000" />
+    <public type="xml" name="accessibility_service_config" id="0x7f070000" />
+</resources>

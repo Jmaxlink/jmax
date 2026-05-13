@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:background="@drawable/bg_circuit_pattern" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="4.0dip">
+            <TextView android:textSize="24.0sp" android:textStyle="bold" android:textColor="#ffed7931" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="HERMES BRIDGE" android:layout_weight="1.0" android:fontFamily="monospace" />
+            <TextView android:textSize="12.0sp" android:textColor="#ff666666" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="v0.2.0" android:fontFamily="monospace" />
+        </LinearLayout>
+        <View android:background="#ffed7931" android:layout_width="fill_parent" android:layout_height="2.0dip" android:layout_marginBottom="16.0dip" />
+        <LinearLayout android:orientation="vertical" android:background="@drawable/bg_card_rounded" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="16.0dip">
+            <TextView android:textSize="13.0sp" android:textStyle="bold" android:textColor="#ffed7931" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:text="Status" android:fontFamily="monospace" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip">
+                <View android:id="@id/indicatorA11y" android:background="@drawable/bg_status_dot_green" android:layout_width="10.0dip" android:layout_height="10.0dip" />
+                <TextView android:textSize="13.0sp" android:textColor="#ffaaaaaa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="  a11y" android:fontFamily="monospace" />
+                <TextView android:textSize="13.0sp" android:textColor="#ff4caf50" android:id="@id/tvA11yStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="active" android:fontFamily="monospace" android:layout_marginStart="4.0dip" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip">
+                <View android:id="@id/indicatorServer" android:background="@drawable/bg_status_dot_green" android:layout_width="10.0dip" android:layout_height="10.0dip" />
+                <TextView android:textSize="13.0sp" android:textColor="#ffaaaaaa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="  server" android:fontFamily="monospace" />
+                <TextView android:textSize="13.0sp" android:textColor="#ff4caf50" android:id="@id/tvServerStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8765" android:fontFamily="monospace" android:layout_marginStart="4.0dip" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip">
+                <View android:id="@id/indicatorRelay" android:background="@drawable/bg_status_dot_green" android:layout_width="10.0dip" android:layout_height="10.0dip" />
+                <TextView android:textSize="13.0sp" android:textColor="#ffaaaaaa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="  relay" android:fontFamily="monospace" />
+                <TextView android:textSize="13.0sp" android:textColor="#ff4caf50" android:id="@id/tvRelayAddr" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="—" android:fontFamily="monospace" android:layout_marginStart="4.0dip" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <View android:id="@id/indicatorAuth" android:background="@drawable/bg_status_dot_green" android:layout_width="10.0dip" android:layout_height="10.0dip" />
+                <TextView android:textSize="13.0sp" android:textColor="#ffaaaaaa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="  auth" android:fontFamily="monospace" />
+                <TextView android:textSize="13.0sp" android:textColor="#ff4caf50" android:id="@id/tvAuthCode" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="------" android:fontFamily="monospace" android:layout_marginStart="4.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:background="@drawable/bg_card_rounded" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="16.0dip">
+            <TextView android:textSize="13.0sp" android:textStyle="bold" android:textColor="#ffed7931" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:text="Permissions" android:fontFamily="monospace" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+                <TextView android:textSize="13.0sp" android:textColor="#ffcccccc" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Enable Accessibility Service" android:layout_weight="1.0" android:fontFamily="monospace" />
+                <Switch android:id="@id/switchAccessibility" android:layout_width="wrap_content" android:layout_height="wrap_content" android:thumb="@drawable/bg_switch_thumb" android:track="@drawable/bg_switch_track" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip">
+                <TextView android:textSize="13.0sp" android:textColor="#ffcccccc" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Enable Status Overlay" android:layout_weight="1.0" android:fontFamily="monospace" />
+                <Switch android:id="@id/switchOverlay" android:layout_width="wrap_content" android:layout_height="wrap_content" android:thumb="@drawable/bg_switch_thumb" android:track="@drawable/bg_switch_track" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="13.0sp" android:textColor="#ffcccccc" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Screen Recording Granted" android:layout_weight="1.0" android:fontFamily="monospace" />
+                <Switch android:id="@id/switchScreenRecord" android:layout_width="wrap_content" android:layout_height="wrap_content" android:thumb="@drawable/bg_switch_thumb" android:track="@drawable/bg_switch_track" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:background="@drawable/bg_card_rounded" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="16.0dip">
+            <TextView android:textSize="13.0sp" android:textStyle="bold" android:textColor="#ffed7931" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:text="Pairing Code" android:fontFamily="monospace" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip">
+                <TextView android:textSize="36.0sp" android:textStyle="bold" android:textColor="#ff4caf50" android:id="@id/tvPairingCode" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="------" android:layout_weight="1.0" android:fontFamily="monospace" android:letterSpacing="0.3" />
+                <Button android:textSize="12.0sp" android:textColor="#ffffffff" android:id="@id/btnRegenerate" android:background="@drawable/bg_button_orange" android:layout_width="wrap_content" android:layout_height="36.0dip" android:text="Refresh" android:textAllCaps="false" android:fontFamily="monospace" android:paddingStart="16.0dip" android:paddingEnd="16.0dip" />
+            </LinearLayout>
+            <TextView android:textSize="11.0sp" android:textColor="#ff666666" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Tap code to copy. Send to Hermes, connect my phone, code is..." android:fontFamily="monospace" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:background="@drawable/bg_card_rounded" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="16.0dip">
+            <TextView android:textSize="13.0sp" android:textStyle="bold" android:textColor="#ffed7931" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:text="Connect to Server" android:fontFamily="monospace" />
+            <EditText android:textSize="15.0sp" android:textColor="#ffcccccc" android:textColorHint="#ff444444" android:id="@id/etServerUrl" android:background="@drawable/bg_input_dark" android:layout_width="fill_parent" android:layout_height="44.0dip" android:layout_marginBottom="8.0dip" android:hint="server-ip:8766" android:singleLine="true" android:inputType="textUri" android:fontFamily="monospace" android:paddingStart="12.0dip" android:paddingEnd="12.0dip" />
+            <TextView android:textSize="12.0sp" android:textColor="#ff888888" android:id="@id/tvRelayStatus" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:text="Not connected" android:fontFamily="monospace" />
+            <Button android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff1a1a1a" android:id="@id/btnConnect" android:background="@drawable/bg_button_orange" android:layout_width="fill_parent" android:layout_height="48.0dip" android:text="CONNECT" android:textAllCaps="false" android:fontFamily="monospace" />
+        </LinearLayout>
+        <Button android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/btnDisconnect" android:background="@drawable/bg_button_disconnect" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="48.0dip" android:layout_marginBottom="16.0dip" android:text="⏏ DISCONNECT" android:textAllCaps="false" android:fontFamily="monospace" />
+        <TextView android:textSize="10.0sp" android:textColor="#ff444444" android:gravity="center_horizontal" android:id="@id/tvAddress" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:fontFamily="monospace" />
+        <TextView android:textSize="0.0sp" android:id="@id/tvStatus" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" android:text="" />
+        <TextView android:textSize="0.0sp" android:id="@id/tvScreenRecordStatus" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" android:text="" />
+        <Button android:id="@id/btnAccessibility" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" android:text="" />
+        <Button android:id="@id/btnOverlay" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" android:text="" />
+        <Button android:id="@id/btnScreenRecord" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" android:text="" />
+        <TextView android:id="@id/tvSetupCommand" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" android:text="" />
+    </LinearLayout>
+</ScrollView>

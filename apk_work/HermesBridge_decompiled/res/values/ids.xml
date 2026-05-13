@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="btnAccessibility" />
+    <item type="id" name="btnConnect" />
+    <item type="id" name="btnDisconnect" />
+    <item type="id" name="btnOverlay" />
+    <item type="id" name="btnRegenerate" />
+    <item type="id" name="btnScreenRecord" />
+    <item type="id" name="etServerUrl" />
+    <item type="id" name="indicatorA11y" />
+    <item type="id" name="indicatorAuth" />
+    <item type="id" name="indicatorRelay" />
+    <item type="id" name="indicatorServer" />
+    <item type="id" name="switchAccessibility" />
+    <item type="id" name="switchOverlay" />
+    <item type="id" name="switchScreenRecord" />
+    <item type="id" name="tvA11yStatus" />
+    <item type="id" name="tvAddress" />
+    <item type="id" name="tvAuthCode" />
+    <item type="id" name="tvPairingCode" />
+    <item type="id" name="tvRelayAddr" />
+    <item type="id" name="tvRelayStatus" />
+    <item type="id" name="tvScreenRecordStatus" />
+    <item type="id" name="tvServerStatus" />
+    <item type="id" name="tvSetupCommand" />
+    <item type="id" name="tvStatus" />
+</resources>
